@@ -1,3 +1,21 @@
+###
+## abstract class test  
+# class FrameAnalyser(AbstractFrameAnalyser):
+#     def __init__(self):
+#         super().__init__()
+#         print('frame analyser / init ... ')
+#         self.analyseScale('test')
+#         self.analyseTone()
+#         print('frame analyser / loaded')
+
+#     def analyseScale(self, test):
+#         print('frame analyser / analysis scale test')
+#         return super().analyseScale()
+#     def analyseTone(self):
+#         print('frame analyser / analysis tone test')
+#         return super().analyseTone()
+
+
 from abc import abstractmethod
 
 from modules.analyser.struct import AudioFormat
@@ -20,18 +38,3 @@ class AbstractFrameAnalyser:
         pass
     
   
-## abstract class test  
-# class FrameAnalyser(AbstractFrameAnalyser):
-#     def __init__(self):
-#         super().__init__()
-#         print('frame analyser / init ... ')
-#         self.analyseScale('test')
-#         self.analyseTone()
-#         print('frame analyser / loaded')
-
-#     def analyseScale(self, test):
-#         print('frame analyser / analysis scale test')
-#         return super().analyseScale()
-#     def analyseTone(self):
-#         print('frame analyser / analysis tone test')
-#         return super().analyseTone()
