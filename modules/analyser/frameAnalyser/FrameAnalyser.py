@@ -4,7 +4,8 @@ import pyaudio
 import time
 import librosa
 
-from modules.analyser.struct import AudioFormat
+
+from modules.analyser.structs import AudioAnalysed, AudioFormat
 
 
 class TestFrameAnalyser(AbstractFrameAnalyser):
@@ -27,20 +28,24 @@ class MicFrameAnalyser(AbstractFrameAnalyser):
         super().__init__(audioFormat)
         print('frame analyser / loaded')
         
-    def callback(self, in_data, frame_count, time_info, flag):
+    def analyse(self, in_data, frame_count, time_info, flag):
         print('frame analyse / callback start')
         scaleResult = self.analyseScale(in_data, frame_count, time_info, flag)
         toneResult = self.analyseTone(in_data, frame_count, time_info, flag)
-        return toneResult
+        self.analysed = AudioAnalysed(scaleResult, toneResult)
+        return None, pyaudio.paContinue
         
     def analyseScale(self, in_data, frame_count, time_info, flag):
         numpy_array = np.frombuffer(in_data, dtype=np.float32)
-        librosa.feature.mfcc(numpy_array)
+        #librosa.feature.mfcc(numpy_array)
+        numpy_array = np.fft.fft(numpy_array)
         print(f'{frame_count} during {self.CHUNK / self.RATE}s -> {len(numpy_array)} {time_info}')
-        return None, pyaudio.paContinue
+        return numpy_array
 
     def analyseTone(self, in_data, frame_count, time_info, flag):
         numpy_array = np.frombuffer(in_data, dtype=np.float32)
         librosa.feature.mfcc(numpy_array)
         print(f'{frame_count} during {self.CHUNK / self.RATE}s -> {len(numpy_array)} {time_info}')
-        return None, pyaudio.paContinue
+        return numpy_array
+    def getResults(self):
+        return super().getResults()

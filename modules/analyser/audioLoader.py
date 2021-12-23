@@ -3,7 +3,7 @@ import pyaudio
 import time
 import librosa
 
-from modules.analyser.struct import AudioFormat
+from modules.analyser.structs import AudioFormat
 
 class MicAudioLoader:
     def __init__(self, audioFormat: AudioFormat):

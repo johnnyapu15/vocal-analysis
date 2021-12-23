@@ -18,7 +18,7 @@
 
 from abc import abstractmethod
 
-from modules.analyser.struct import AudioFormat
+from modules.analyser.structs import AudioAnalysed, AudioFormat
 
 class AbstractFrameAnalyser:
     @abstractmethod
@@ -29,6 +29,7 @@ class AbstractFrameAnalyser:
         self.CHANNELS   = audioFormat.CHANNELS
         self.RATE       = audioFormat.RATE    
         self.CHUNK      = audioFormat.CHUNK   
+        self.analysed: AudioAnalysed = None
         return
     @abstractmethod
     def analyseScale(self):
@@ -36,5 +37,8 @@ class AbstractFrameAnalyser:
     @abstractmethod
     def analyseTone(self):
         pass
+    @abstractmethod
+    def getResults(self):
+        return self.analysed
     
   
